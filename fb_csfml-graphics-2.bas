@@ -27,6 +27,7 @@ end type
 Declare Function sfRenderWindow_create cdecl Alias "sfRenderWindow_create" (byval mode As sfVideoMode, byval title as ZString ptr, byval style as uinteger, byval settings as long ptr) As Long ptr
 Declare Sub sfRenderWindow_clear cdecl Alias "sfRenderWindow_clear" (byval renderWindow As Long Ptr, byval color2 as sfColor)
 Declare Sub sfSprite_setPosition cdecl Alias "sfSprite_setPosition" (byval sprite as long ptr, byval position as sfVector2f)
+Declare Sub sfText_setPosition cdecl Alias "sfText_setPosition" (byval text as long ptr, byval position as sfVector2f)
 
 
 'Public Function fb_sfRenderWindow_create cdecl Alias "fb_sfRenderWindow_create" (byval width2 As uinteger, byval height2 As uinteger, byval bitsPerPixel2 As uinteger, byval title as zstring ptr, byval style as uinteger, byval settings as long ptr) As Long ptr Export
@@ -69,4 +70,9 @@ End Sub
 Public Sub fb_sfSprite_setPosition cdecl Alias "fb_sfSprite_setPosition" (byval sprite as long ptr, byval position as sfVector2f ptr) Export
 
     sfSprite_setPosition (sprite, *position)
+End Sub
+
+Public Sub fb_sfText_setPosition cdecl Alias "fb_sfText_setPosition" (byval text as long ptr, byval position as sfVector2f ptr) Export
+
+    sfText_setPosition (text, *position)
 End Sub

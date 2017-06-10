@@ -714,116 +714,135 @@ Global _CSFML_sfRenderWindow_display.ProtosfRenderWindow_display = GetFunction(3
 
 
 
-; ; #FUNCTION# ====================================================================================================================
-; ; Name...........: _CSFML_sfText_create
-; ; Description ...: Create a new text.
-; ; Syntax.........: _CSFML_sfText_create()
-; ; Parameters ....: None
-; ; Return values .: Success - A new sfText object
-; ;				   Failure - 0 or Null
-; ; Author ........: Sean Griffin
-; ; Modified.......:
-; ; Remarks .......:
-; ; Related .......:
-; ; Link ..........:
-; ; Example .......:
-; ; ===============================================================================================================================
-; Procedure _CSFML_sfText_create() As long ptr
-; 
-;     Dim As long ptr fred3 = _CSFML_sfText_create()
-;     Return fred3
-; EndProcedure
-; 
-; 
-; ; #FUNCTION# ====================================================================================================================
-; ; Name...........: _CSFML_sfFont_createFromFile
-; ; Description ...: Create a new font from a file.
-; ; Syntax.........: _CSFML_sfFont_createFromFile($filename)
-; ; Parameters ....: $filename - Path of the font file to load
-; ; Return values .: Success - A new sfFont object
-; ;				   Failure - 0 or Null
-; ; Author ........: Sean Griffin
-; ; Modified.......:
-; ; Remarks .......:
-; ; Related .......:
-; ; Link ..........:
-; ; Example .......:
-; ; ===============================================================================================================================
-; Procedure _CSFML_sfFont_createFromFile(byval filename As ZString Ptr) As long ptr
-; 
-;     Dim As long ptr fred3 = sfFont_createFromFile(filename)
-;     Return fred3
-; EndProcedure
-; 
-; 
-; ; #FUNCTION# ====================================================================================================================
-; ; Name...........: _CSFML_sfText_setString
-; ; Description ...: Set the string of a text (from an ANSI string).
-; ;				   A text;s string is empty by Default
-; ; Syntax.........: _CSFML_sfText_setString($text, $string)
-; ; Parameters ....: $text - Text object
-; ;				   $string - New string
-; ; Return values .: Success - True
-; ;				   Failure - 0
-; ; Author ........: Sean Griffin
-; ; Modified.......:
-; ; Remarks .......:
-; ; Related .......:
-; ; Link ..........:
-; ; Example .......:
-; ; ===============================================================================================================================
-; Sub _CSFML_sfText_setString(byval text As Long Ptr, byval string2 As ZString Ptr)
-; 
-;     sfText_setString(text, string2)
-; End Sub
-; 
-; 
-; ; #FUNCTION# ====================================================================================================================
-; ; Name...........: _CSFML_sfText_setFont
-; ; Description ...: Set the font of a text.
-; ;				   The font argument refers to a texture that must exist as long as the text uses it. Indeed, the text
-; ;				   doesn't store its own copy of the font, but rather keeps a pointer To the one that you passed To this
-; ;				   function. If the font is destroyed and the text tries to use it, the behaviour is undefined
-; ; Syntax.........: _CSFML_sfText_setFont($text, $font)
-; ; Parameters ....: $text - Text object
-; ;				   $font - New font
-; ; Return values .: Success - True
-; ;				   Failure - 0
-; ; Author ........: Sean Griffin
-; ; Modified.......:
-; ; Remarks .......:
-; ; Related .......:
-; ; Link ..........:
-; ; Example .......:
-; ; ===============================================================================================================================
-; Sub _CSFML_sfText_setFont(byval text As Long Ptr, byval font As Long Ptr)
-; 
-;     sfText_setFont(text, font)
-; End Sub
-; 
-; 
-; ; #FUNCTION# ====================================================================================================================
-; ; Name...........: _CSFML_sfText_setCharacterSize
-; ; Description ...: Set the character size of a text.
-; ;				   The default size is 30.
-; ; Syntax.........: _CSFML_sfText_setCharacterSize($text, $size)
-; ; Parameters ....: $text - Text object
-; ;				   $size - New character size, in pixels
-; ; Return values .: Success - True
-; ;				   Failure - 0
-; ; Author ........: Sean Griffin
-; ; Modified.......:
-; ; Remarks .......:
-; ; Related .......:
-; ; Link ..........:
-; ; Example .......:
-; ; ===============================================================================================================================
-; Sub _CSFML_sfText_setCharacterSize(byval text As Long Ptr, byval size As uinteger)
-; 
-;     sfText_setCharacterSize(text, size)
-; End Sub
-; 
-; 
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfText_create
+; Description ...: Create a new text.
+; Syntax.........: _CSFML_sfText_create()
+; Parameters ....: None
+; Return values .: Success - A new sfText object
+;				   Failure - 0 or Null
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC.l ProtosfText_create()
+Global _CSFML_sfText_create.ProtosfText_create = GetFunction(3, "sfText_create")
+
+
+;Procedure _CSFML_sfText_create() As long ptr
+
+;    Dim As long ptr fred3 = _CSFML_sfText_create()
+;    Return fred3
+;EndProcedure
+
+
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfFont_createFromFile
+; Description ...: Create a new font from a file.
+; Syntax.........: _CSFML_sfFont_createFromFile($filename)
+; Parameters ....: $filename - Path of the font file to load
+; Return values .: Success - A new sfFont object
+;				   Failure - 0 or Null
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC.l ProtosfFont_createFromFile(filename.p-ascii)
+Global _CSFML_sfFont_createFromFile.ProtosfFont_createFromFile = GetFunction(3, "sfFont_createFromFile")
+
+
+;Procedure _CSFML_sfFont_createFromFile(byval filename As ZString Ptr) As long ptr
+
+;    Dim As long ptr fred3 = sfFont_createFromFile(filename)
+;    Return fred3
+;EndProcedure
+
+
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfText_setString
+; Description ...: Set the string of a text (from an ANSI string).
+;				   A text;s string is empty by Default
+; Syntax.........: _CSFML_sfText_setString($text, $string)
+; Parameters ....: $text - Text object
+;				   $string - New string
+; Return values .: Success - True
+;				   Failure - 0
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC ProtosfText_setString(*text, filename.p-ascii)
+Global _CSFML_sfText_setString.ProtosfText_setString = GetFunction(3, "sfText_setString")
+
+
+;Sub _CSFML_sfText_setString(byval text As Long Ptr, byval string2 As ZString Ptr)
+
+;    sfText_setString(text, string2)
+;End Sub
+
+
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfText_setFont
+; Description ...: Set the font of a text.
+;				   The font argument refers to a texture that must exist as long as the text uses it. Indeed, the text
+;				   doesn't store its own copy of the font, but rather keeps a pointer To the one that you passed To this
+;				   function. If the font is destroyed and the text tries to use it, the behaviour is undefined
+; Syntax.........: _CSFML_sfText_setFont($text, $font)
+; Parameters ....: $text - Text object
+;				   $font - New font
+; Return values .: Success - True
+;				   Failure - 0
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC ProtosfText_setFont(*text, *font)
+Global _CSFML_sfText_setFont.ProtosfText_setFont = GetFunction(3, "sfText_setFont")
+
+
+;Sub _CSFML_sfText_setFont(byval text As Long Ptr, byval font As Long Ptr)
+
+;    sfText_setFont(text, font)
+;End Sub
+
+
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfText_setCharacterSize
+; Description ...: Set the character size of a text.
+;				   The default size is 30.
+; Syntax.........: _CSFML_sfText_setCharacterSize($text, $size)
+; Parameters ....: $text - Text object
+;				   $size - New character size, in pixels
+; Return values .: Success - True
+;				   Failure - 0
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC ProtosfText_setCharacterSize(*text, size.i)
+Global _CSFML_sfText_setCharacterSize.ProtosfText_setCharacterSize = GetFunction(3, "sfText_setCharacterSize")
+
+;Sub _CSFML_sfText_setCharacterSize(byval text As Long Ptr, byval size As uinteger)
+
+;    sfText_setCharacterSize(text, size)
+;End Sub
+
+
 ; ; #FUNCTION# ====================================================================================================================
 ; ; Name...........: _CSFML_sfText_setFillColor
 ; ; Description ...: Set the fill color of a text.
@@ -847,30 +866,34 @@ Global _CSFML_sfRenderWindow_display.ProtosfRenderWindow_display = GetFunction(3
 ; End Sub
 ; 
 ; 
-; ; #FUNCTION# ====================================================================================================================
-; ; Name...........: _CSFML_sfText_setPosition
-; ; Description ...: Set the position of a text.
-; ;				   This function completely overwrites the previous position. See sfText_move to apply an offset based on
-; ;				   the previous position instead. The default position of a text Text object is (0, 0).
-; 
-; ; Syntax.........: _CSFML_sfText_setPosition($text, $position)
-; ; Parameters ....: $text - Text object
-; ;				   $position - New position
-; ; Return values .: Success - True
-; ;				   Failure - 0
-; ; Author ........: Sean Griffin
-; ; Modified.......:
-; ; Remarks .......:
-; ; Related .......:
-; ; Link ..........:
-; ; Example .......:
-; ; ===============================================================================================================================
-; Sub _CSFML_sfText_setPosition(byval text As Long Ptr, byval position As sfVector2f)
-; 
-;     sfText_setPosition(text, position)
-; End Sub
-; 
-; 
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfText_setPosition
+; Description ...: Set the position of a text.
+;				   This function completely overwrites the previous position. See sfText_move to apply an offset based on
+;				   the previous position instead. The default position of a text Text object is (0, 0).
+
+; Syntax.........: _CSFML_sfText_setPosition($text, $position)
+; Parameters ....: $text - Text object
+;				   $position - New position
+; Return values .: Success - True
+;				   Failure - 0
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC Protofb_sfText_setPosition(*sprite, *position)
+Global _CSFML_sfText_setPosition.Protofb_sfText_setPosition = GetFunction(6, "fb_sfText_setPosition")
+
+
+;Sub _CSFML_sfText_setPosition(byval text As Long Ptr, byval position As sfVector2f)
+
+;    sfText_setPosition(text, position)
+;End Sub
+
+
 ; ; #FUNCTION# ====================================================================================================================
 ; ; Name...........: _CSFML_sfSprite_getPosition
 ; ; Description ...: Set the position of a sprite, with a sfVector2f structure.
@@ -921,28 +944,32 @@ Global _CSFML_sfSprite_setPosition.Protofb_sfSprite_setPosition = GetFunction(6,
 ;End Sub
 
 
-; ; #FUNCTION# ====================================================================================================================
-; ; Name...........: _CSFML_sfRenderWindow_drawText
-; ; Description ...: Draw text in a render window.
-; ; Syntax.........: _CSFML_sfRenderWindow_drawText($renderWindow, $object, $states)
-; ; Parameters ....: $renderWindow - Render window object
-; ;				   $object - the text to draw
-; ;				   $states - Render states to use for drawing (Null to use the default states)
-; ; Return values .: Success - True
-; ;				   Failure - 0
-; ; Author ........: Sean Griffin
-; ; Modified.......:
-; ; Remarks .......:
-; ; Related .......: _CSFML_sfRenderWindow_create
-; ; Link ..........:
-; ; Example .......:
-; ; ===============================================================================================================================
-; Sub _CSFML_sfRenderWindow_drawText(byval renderWindow As Long Ptr, byval object2 As Long Ptr, byval states As Long Ptr)
-; 
-;     sfRenderWindow_drawText(renderWindow, object2, states)
-; End Sub
-; 
-; 
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfRenderWindow_drawText
+; Description ...: Draw text in a render window.
+; Syntax.........: _CSFML_sfRenderWindow_drawText($renderWindow, $object, $states)
+; Parameters ....: $renderWindow - Render window object
+;				   $object - the text to draw
+;				   $states - Render states to use for drawing (Null to use the default states)
+; Return values .: Success - True
+;				   Failure - 0
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......: _CSFML_sfRenderWindow_create
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC ProtosfRenderWindow_drawText(*renderWindow, *object, *states)
+Global _CSFML_sfRenderWindow_drawText.ProtosfRenderWindow_drawText = GetFunction(3, "sfRenderWindow_drawText")
+
+
+;Sub _CSFML_sfRenderWindow_drawText(byval renderWindow As Long Ptr, byval object2 As Long Ptr, byval states As Long Ptr)
+
+;    sfRenderWindow_drawText(renderWindow, object2, states)
+;End Sub
+
+
 ; ; #FUNCTION# ====================================================================================================================
 ; ; Name...........: _CSFML_sfText_create_and_set
 ; ; Description ...: A convenience function to create a new text and also set it;s properties in one call.
@@ -1018,8 +1045,8 @@ Global _CSFML_sfSprite_setPosition.Protofb_sfSprite_setPosition = GetFunction(6,
 ; 
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x86)
-; CursorPosition = 914
-; FirstLine = 909
+; CursorPosition = 893
+; FirstLine = 858
 ; Folding = -
 ; EnableUnicode
 ; EnableXP
