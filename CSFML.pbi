@@ -262,6 +262,7 @@ EndStructure
 
 
 ; #GLOBALS# ===================================================================================================================
+
 Global sfBool.i
 
 ;; 8 bits integer types
@@ -291,6 +292,25 @@ Global sfCyan.sfColor
 ;Dim Shared As sfColor black => (0, 0, 0, 255)
 ;Dim Shared As sfColor white => (255, 255, 255, 255)
 ;Dim Shared As Any Ptr courier_new_font_ptr
+
+Global event.sfEvent
+
+Global black.sfColor
+black\r = 0
+black\g = 0
+black\b = 0
+black\a = 255
+
+Global white.sfColor
+white\r = 0
+white\g = 100
+white\b = 0
+white\a = 255
+
+Global mode.sfVideoMode
+
+
+
 ; ===============================================================================================================================
 
 
@@ -325,6 +345,14 @@ OpenLibrary(6, "fb_csfml-graphics-2.dll")
 Procedure _CSFML_Startup()
 
   ;  courier_new_font_ptr = sfFont_createFromFile("C:\Windows\Fonts\cour.ttf")
+
+  event\type = 999
+  
+  mode\width2 = 800
+  mode\height2 = 600
+  mode\bitsPerPixel2 = 16
+
+
 
 
 EndProcedure
@@ -893,6 +921,32 @@ Global _CSFML_sfText_setPosition.Protofb_sfText_setPosition = GetFunction(6, "fb
 ;    sfText_setPosition(text, position)
 ;End Sub
 
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfSprite_setRotation
+; Description ...: Set the orientation of a sprite.
+;				   This function completely overwrites the previous rotation. See sfSprite_rotate to add an angle based on
+;				   the previous rotation instead. The default rotation of a sprite Sprite object is 0.
+; Syntax.........: _CSFML_sfSprite_setRotation($sprite, $angle)
+; Parameters ....: $sprite - Sprite object
+;				   $angle - New rotation, in degrees
+; Return values .: Success - True
+;				   Failure - 0
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......: _CSFML_sfSprite_create
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC Protofb_sfSprite_setRotation(*sprite, angle.f)
+Global _CSFML_sfSprite_setRotation.Protofb_sfSprite_setRotation = GetFunction(3, "sfSprite_setRotation")
+
+
+;Sub _CSFML_sfSprite_setRotation(byval sprite As Long Ptr, byval angle As single)
+
+ ;   sfSprite_setRotation(sprite, angle)
+;End Sub
+
 
 ; ; #FUNCTION# ====================================================================================================================
 ; ; Name...........: _CSFML_sfSprite_getPosition
@@ -997,30 +1051,33 @@ Global _CSFML_sfRenderWindow_drawText.ProtosfRenderWindow_drawText = GetFunction
 ; EndProcedure
 ; 
 ; 
-; ; #FUNCTION# ====================================================================================================================
-; ; Name...........: _CSFML_sfSprite_setOrigin
-; ; Description ...: Set the local origin of a sprite.
-; ;				   The origin of an object defines the center point for all transformations (position, scale, rotation).
-; ;				   The coordinates of this point must be relative to the top-left corner of the object, and ignore all
-; ;				   transformations (position, scale, rotation). The default origin of a sprite Sprite object is (0, 0).
-; ; Syntax.........: _CSFML_sfSprite_setOrigin($sprite, $origin)
-; ; Parameters ....: $sprite - Sprite object
-; ;				   $origin - New origin (sfVector2f)
-; ; Return values .: Success - True
-; ;				   Failure - 0
-; ; Author ........: Sean Griffin
-; ; Modified.......:
-; ; Remarks .......:
-; ; Related .......: _CSFML_sfSprite_create, _CSFML_sfVector2f_Constructor
-; ; Link ..........:
-; ; Example .......:
-; ; ===============================================================================================================================
-; Sub _CSFML_sfSprite_setOrigin(byval sprite As Long Ptr, byval origin As sfVector2f)
-; 
-;     sfSprite_setOrigin(sprite, origin)
-; End Sub
-; 
-; 
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfSprite_setOrigin
+; Description ...: Set the local origin of a sprite.
+;				   The origin of an object defines the center point for all transformations (position, scale, rotation).
+;				   The coordinates of this point must be relative to the top-left corner of the object, and ignore all
+;				   transformations (position, scale, rotation). The default origin of a sprite Sprite object is (0, 0).
+; Syntax.........: _CSFML_sfSprite_setOrigin($sprite, $origin)
+; Parameters ....: $sprite - Sprite object
+;				   $origin - New origin (sfVector2f)
+; Return values .: Success - True
+;				   Failure - 0
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......: _CSFML_sfSprite_create, _CSFML_sfVector2f_Constructor
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC Protofb_sfSprite_setOrigin(*sprite, *position)
+Global _CSFML_sfSprite_setOrigin.Protofb_sfSprite_setOrigin = GetFunction(6, "fb_sfSprite_setOrigin")
+
+;Sub _CSFML_sfSprite_setOrigin(byval sprite As Long Ptr, byval origin As sfVector2f)
+
+;    sfSprite_setOrigin(sprite, origin)
+;End Sub
+
+
 ; ; #FUNCTION# ====================================================================================================================
 ; ; Name...........: _CSFML_sfSprite_setRotation
 ; ; Description ...: Set the orientation of a sprite.
@@ -1045,8 +1102,8 @@ Global _CSFML_sfRenderWindow_drawText.ProtosfRenderWindow_drawText = GetFunction
 ; 
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x86)
-; CursorPosition = 893
-; FirstLine = 858
+; CursorPosition = 1072
+; FirstLine = 1043
 ; Folding = -
 ; EnableUnicode
 ; EnableXP
