@@ -237,7 +237,7 @@ EndStructure
 
 Structure sfEvent Align #PB_Structure_AlignC
 StructureUnion 
-    T.i ; As sfEventType ;;< Type of the event
+    type.i ; As sfEventType ;;< Type of the event
     Key.sfKeyEvent
     Text.sfTextEvent
     MouseMove.sfMouseMoveEvent
@@ -285,73 +285,24 @@ Global sfYellow.sfColor
 Global sfMagenta.sfColor
 Global sfCyan.sfColor
 
-
-; #FUNCTIONS# ===================================================================================================================
-Dim Shared sfClock_create As Function () As Long Ptr
-Dim Shared sfClock_getElapsedTime As Function (byval clock As Long Ptr) As LongInt
-Dim Shared sfRenderWindow_create As Function (byval mode As sfVideoMode, byval title As ZString Ptr, byval style As uinteger, byval settings As long ptr) As Long ptr
-Dim Shared sfRenderWindow_getSystemHandle As Function (byval renderWindow As Long Ptr) As LongInt
-Dim Shared sfRenderWindow_setVerticalSyncEnabled As Sub (byval renderWindow As Long Ptr, byval enabled As Boolean)
-;Dim Shared sfRenderWindow_pollEvent As Function (byval renderWindow As Long Ptr, byref event As Long Ptr) as integer
-Dim Shared sfRenderWindow_pollEvent As Function (byval renderWindow As Long Ptr, byval event As sfEvent Ptr) As integer
-Dim Shared sfRenderWindow_close As Sub (byval renderWindow As Long Ptr)
-Dim Shared sfSprite_create As Function () As Long Ptr
-Dim Shared sfTexture_createFromFile As Function (byval filename As ZString Ptr, byval area As long ptr) As long ptr
-Dim Shared sfSprite_setTexture As Sub (byval sprite As Long Ptr, byval texture As Long Ptr, byval resetRect As Boolean)
-Dim Shared sfRenderWindow_clear As Sub (byval renderWindow As Long Ptr, byval color2 As sfColor)
-Dim Shared sfRenderWindow_drawSprite As Sub (byval renderWindow As Long Ptr, byval object2 As Long Ptr, byval states As Long Ptr)
-Dim Shared sfRenderWindow_display As Sub (byval renderWindow As Long Ptr)
-Dim Shared sfText_create As Function () As Long Ptr
-Dim Shared sfFont_createFromFile As Function (byval filename As ZString Ptr) As long ptr
-Dim Shared sfText_setString As Sub (byval text As Long Ptr, byval string2 As ZString Ptr)
-Dim Shared sfText_setFont As Sub (byval text As Long Ptr, byval font As Long Ptr)
-Dim Shared sfText_setCharacterSize As Sub (byval text As Long Ptr, byval size As uinteger)
-Dim Shared sfText_setFillColor As Sub (byval text As Long Ptr, byval color2 As sfColor)
-Dim Shared sfText_setPosition As Sub (byval text As Long Ptr, byval position As sfVector2f)
-Dim Shared sfSprite_setPosition As Sub (byval sprite As Long Ptr, byval position As sfVector2f)
-Dim Shared sfRenderWindow_drawText As Sub (byval renderWindow As Long Ptr, byval object2 As Long Ptr, byval states As Long Ptr)
-Dim Shared sfSprite_getPosition As Function (byval sprite As Long Ptr) As sfVector2f
-Dim Shared sfSprite_setOrigin As Sub (byval sprite As Long Ptr, byval origin As sfVector2f)
-Dim Shared sfSprite_setRotation As Sub (byval sprite As Long Ptr, byval angle As single)
-
-Declare Sub _CSFML_Startup
-Declare Sub _CSFML_Shutdown
-Declare Function _CSFML_sfClock_create () As Long Ptr
-Declare Function _CSFML_sfClock_getElapsedTime (clock As Long Ptr) As LongInt
-Declare Function _CSFML_sfRenderWindow_create (byval width3 As uinteger, byval height As uinteger, byval bitsPerPixel As uinteger, byval title As ZString Ptr, byval style As uinteger, byval settings As long ptr) As long ptr
-Declare Function _CSFML_sfRenderWindow_getSystemHandle (byval renderWindow As Long Ptr) As LongInt
-Declare Sub _CSFML_sfRenderWindow_setVerticalSyncEnabled(byval renderWindow As Long Ptr, byval enabled As Boolean)
-;Declare Function _CSFML_sfRenderWindow_pollEvent(byval renderWindow As Long Ptr, byref event As Long Ptr) as integer
-Declare Function _CSFML_sfRenderWindow_pollEvent(byval renderWindow As Long Ptr, byval event As sfEvent Ptr) As integer
-Declare Sub _CSFML_sfRenderWindow_close(byval renderWindow As Long Ptr)
-Declare Function _CSFML_sfSprite_create() As long ptr
-Declare Function _CSFML_sfTexture_createFromFile(byval filename As ZString Ptr, byval area As long ptr) As long ptr
-Declare Sub _CSFML_sfSprite_setTexture(byval sprite As Long Ptr, byval texture As Long Ptr, byval resetRect As Boolean)
-Declare Sub _CSFML_sfRenderWindow_clear(byval renderWindow As Long Ptr, byval color2 As sfColor)
-Declare Sub _CSFML_sfRenderWindow_drawSprite(byval renderWindow As Long Ptr, byval object2 As Long Ptr, byval states As Long Ptr)
-Declare Sub _CSFML_sfRenderWindow_display(byval renderWindow As Long Ptr)
-Declare Function _CSFML_sfText_create() As long ptr
-Declare Function _CSFML_sfFont_createFromFile(byval filename As ZString Ptr) As long ptr
-Declare Sub _CSFML_sfText_setString(byval text As Long Ptr, byval string2 As ZString Ptr)
-Declare Sub _CSFML_sfText_setFont(byval text As Long Ptr, byval font As Long Ptr)
-Declare Sub _CSFML_sfText_setCharacterSize(byval text As Long Ptr, byval size As uinteger)
-Declare Sub _CSFML_sfText_setFillColor(byval text As Long Ptr, byval color2 As sfColor)
-Declare Sub _CSFML_sfText_setPosition(byval text As Long Ptr, byval position As sfVector2f)
-Declare Sub _CSFML_sfSprite_setPosition(byval sprite As Long Ptr, byval position As sfVector2f)
-Declare Sub _CSFML_sfRenderWindow_drawText(byval renderWindow As Long Ptr, byval object2 As Long Ptr, byval states As Long Ptr)
-Declare Function _CSFML_sfText_create_and_set(byval font_ptr As Long Ptr, byval size As uinteger, byval color2 As sfColor, byval x As Single, byval y As Single) As long ptr
-Declare Function _CSFML_sfSprite_getPosition(byval sprite As Long Ptr) As sfVector2f
-Declare Sub _CSFML_sfSprite_setOrigin(byval sprite As Long Ptr, byval origin As sfVector2f)
-Declare Sub _CSFML_sfSprite_setRotation(byval sprite As Long Ptr, byval angle As single)
+;Dim Shared As Any Ptr csfml_system_library
+;Dim Shared As Any Ptr csfml_graphics_library
+;Dim Shared As Any Ptr csfml_window_library
+;Dim Shared As sfColor black => (0, 0, 0, 255)
+;Dim Shared As sfColor white => (255, 255, 255, 255)
+;Dim Shared As Any Ptr courier_new_font_ptr
 ; ===============================================================================================================================
 
+
+; #LIBRARIES# ===================================================================================================================
+
+OpenLibrary(2, "csfml-system-2.dll")
+OpenLibrary(3, "csfml-graphics-2.dll")
+OpenLibrary(4, "csfml-window-2.dll")
+OpenLibrary(6, "fb_csfml-graphics-2.dll")
+
+
 ; #VARIABLES# ===================================================================================================================
-Dim Shared As Any Ptr csfml_system_library
-Dim Shared As Any Ptr csfml_graphics_library
-Dim Shared As Any Ptr csfml_window_library
-Dim Shared As sfColor black => (0, 0, 0, 255)
-Dim Shared As sfColor white => (255, 255, 255, 255)
-Dim Shared As Any Ptr courier_new_font_ptr
 ; ===============================================================================================================================
 
 
@@ -371,47 +322,12 @@ Dim Shared As Any Ptr courier_new_font_ptr
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Sub _CSFML_Startup
-
-	; load the CSFML DLLs
-	csfml_system_library = DyLibLoad( "csfml-system-2.dll" )
-	csfml_graphics_library = DyLibLoad( "csfml-graphics-2.dll" )
-	csfml_window_library = DyLibLoad( "csfml-window-2.dll" )
-	
-	; create the SFML System library functions for the CSFML DLLs
-	sfClock_create = DyLibSymbol( csfml_system_library, "sfClock_create" )
-	sfClock_getElapsedTime = DyLibSymbol( csfml_system_library, "sfClock_getElapsedTime" )
-
-	; create the SFML Graphics library functions for the CSFML DLLs
-	sfRenderWindow_create = DyLibSymbol( csfml_graphics_library, "sfRenderWindow_create" )
-	sfRenderWindow_getSystemHandle = DyLibSymbol( csfml_graphics_library, "sfRenderWindow_getSystemHandle" )
-	sfRenderWindow_setVerticalSyncEnabled = DyLibSymbol( csfml_graphics_library, "sfRenderWindow_setVerticalSyncEnabled" )
-	sfRenderWindow_pollEvent = DyLibSymbol( csfml_graphics_library, "sfRenderWindow_pollEvent" )
-	sfRenderWindow_close = DyLibSymbol( csfml_graphics_library, "sfRenderWindow_close" )
-	sfSprite_create = DyLibSymbol( csfml_graphics_library, "sfSprite_create" )
-	sfTexture_createFromFile = DyLibSymbol( csfml_graphics_library, "sfTexture_createFromFile" )
-	sfSprite_setTexture = DyLibSymbol( csfml_graphics_library, "sfSprite_setTexture" )
-	sfRenderWindow_clear = DyLibSymbol( csfml_graphics_library, "sfRenderWindow_clear" )
-	sfRenderWindow_drawSprite = DyLibSymbol( csfml_graphics_library, "sfRenderWindow_drawSprite" )
-	sfRenderWindow_display = DyLibSymbol( csfml_graphics_library, "sfRenderWindow_display" )
-	sfText_create = DyLibSymbol( csfml_graphics_library, "sfText_create" )
-	sfFont_createFromFile = DyLibSymbol( csfml_graphics_library, "sfFont_createFromFile" )
-	sfText_setString = DyLibSymbol( csfml_graphics_library, "sfText_setString" )
-	sfText_setFont = DyLibSymbol( csfml_graphics_library, "sfText_setFont" )
-	sfText_setCharacterSize = DyLibSymbol( csfml_graphics_library, "sfText_setCharacterSize" )
-	sfText_setFillColor = DyLibSymbol( csfml_graphics_library, "sfText_setFillColor" )
-	sfText_setPosition = DyLibSymbol( csfml_graphics_library, "sfText_setPosition" )
-	sfSprite_setPosition = DyLibSymbol( csfml_graphics_library, "sfSprite_setPosition" )
-	sfRenderWindow_drawText = DyLibSymbol( csfml_graphics_library, "sfRenderWindow_drawText" )
-	sfSprite_getPosition = DyLibSymbol( csfml_graphics_library, "sfSprite_getPosition" )
-	sfSprite_setOrigin = DyLibSymbol( csfml_graphics_library, "sfSprite_setOrigin" )
-	sfSprite_setRotation = DyLibSymbol( csfml_graphics_library, "sfSprite_setRotation" )
-
+Procedure _CSFML_Startup()
 
   ;  courier_new_font_ptr = sfFont_createFromFile("C:\Windows\Fonts\cour.ttf")
 
 
-End Sub
+EndProcedure
 
 ; #FUNCTION# ====================================================================================================================
 ; Name...........: _CSFML_Shutdown
@@ -426,14 +342,14 @@ End Sub
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-sub _CSFML_Shutdown
+Procedure _CSFML_Shutdown()
 
-	; unload the DLLs
-	DylibFree( csfml_system_library )
-	DylibFree( csfml_graphics_library )
-	DylibFree( csfml_window_library )
+  ; unload the DLLs
+  CloseLibrary(2)
+  CloseLibrary(3)
+  CloseLibrary(4)
 
-End sub
+EndProcedure
 
 
 ; #SFCLOCK FUNCTIONS# =====================================================================================================
@@ -453,11 +369,14 @@ End sub
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Function _CSFML_sfClock_create() As Long Ptr
+PrototypeC.l ProtosfClock_create()
+Global _CSFML_sfClock_create.ProtosfClock_create = GetFunction(2, "sfClock_create")
 
-	Dim As Long Ptr fred = sfClock_create()
-	Return fred
-End Function
+;Procedure.l _CSFML_sfClock_create()
+
+;  fred.l = sfClock_create()
+;	ProcedureReturn fred
+;EndProcedure
 
 
 ; #FUNCTION# ====================================================================================================================
@@ -475,12 +394,15 @@ End Function
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Function _CSFML_sfClock_getElapsedTime(clock As Long Ptr) As LongInt
-	
-	Dim As LongInt fred2 = sfClock_getElapsedTime(clock)
-	Return fred2
+PrototypeC.l ProtosfClock_getElapsedTime(*clock)
+Global _CSFML_sfClock_getElapsedTime.ProtosfClock_getElapsedTime = GetFunction(2, "sfClock_getElapsedTime")
 
-End Function
+;Procedure.l _CSFML_sfClock_getElapsedTime(*clock)
+	
+;	fred2.l = sfClock_getElapsedTime(*clock)
+;	ProcedureReturn fred2
+
+;EndProcedure
 
 
 ; #FUNCTION# ====================================================================================================================
@@ -500,18 +422,16 @@ End Function
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Function _CSFML_sfRenderWindow_create(byval width3 As uinteger, byval height As uinteger, byval bitsPerPixel As uinteger, byval title As ZString Ptr, byval style As uinteger, byval settings As long ptr) As long ptr
+PrototypeC.l Protofb_sfRenderWindow_create(*mode, title.p-ascii, style.i, settings.l)
+Global _CSFML_sfRenderWindow_create.Protofb_sfRenderWindow_create = GetFunction(6, "fb_sfRenderWindow_create")
 
-;Dim Shared As sfVideoMode Mode => (1024, 768, 32)
 
-    Dim mode As sfVideoMode
-    mode.width2 = width3
-    mode.height2 = height
-    mode.bitsPerPixel2 = bitsPerPixel
-    
-	Dim As long ptr fred3 = sfRenderWindow_create(mode, title, style, settings)
-	Return fred3
-End function
+;Procedure.l _CSFML_sfRenderWindow_create(width.i, height.i, bitsPerPixel.i, title.s, style.i, settings.l)
+
+;  fred2.l = fb_sfRenderWindow_create(width, height, bitsPerPixel, title, style, settings)
+;  ProcedureReturn fred2
+	
+;EndProcedure
 
 
 ; #FUNCTION# ====================================================================================================================
@@ -528,11 +448,14 @@ End function
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Function _CSFML_sfRenderWindow_getSystemHandle(byval renderWindow As Long Ptr) As LongInt
+PrototypeC.l ProtosfRenderWindow_getSystemHandle(*renderWindow)
+Global _CSFML_sfRenderWindow_getSystemHandle.ProtosfRenderWindow_getSystemHandle = GetFunction(3, "sfRenderWindow_getSystemHandle")
+
+;Procedure _CSFML_sfRenderWindow_getSystemHandle(byval renderWindow As Long Ptr) As LongInt
 	
-	Dim As LongInt fred2 = sfRenderWindow_getSystemHandle(renderWindow)
-	Return fred2
-End Function
+;	Dim As LongInt fred2 = sfRenderWindow_getSystemHandle(renderWindow)
+;	Return fred2
+;EndProcedure
 
 
 
@@ -551,18 +474,26 @@ End Function
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Sub _CSFML_sfRenderWindow_setVerticalSyncEnabled(byval renderWindow As Long Ptr, byval enabled As Boolean)
-	
-	sfRenderWindow_setVerticalSyncEnabled(renderWindow, enabled)
-End Sub
+PrototypeC ProtosfRenderWindow_setVerticalSyncEnabled(*renderWindow, enabled.i)
+Global _CSFML_sfRenderWindow_setVerticalSyncEnabled.ProtosfRenderWindow_setVerticalSyncEnabled = GetFunction(3, "sfRenderWindow_setVerticalSyncEnabled")
 
-;Func  _CSFML_sfRenderWindow_setVerticalSyncEnabled($renderWindow, $enabled)
-
-;	DllCall($__CSFML_Graphics_DLL, "NONE:cdecl", "sfRenderWindow_setVerticalSyncEnabled", "PTR", $renderWindow, "BOOL", $enabled)
-;	If @error > 0 Then Return SetError(@error,0,0)
-
-;	Return True
-;EndFunc
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfRenderWindow_pollEvent
+; Description ...: Get the event on top of event queue of a render window, if any, and pop it.
+; Syntax.........: _CSFML_sfRenderWindow_pollEvent($renderWindow, $event)
+; Parameters ....: $renderWindow - Render window object
+;				   $event - Event to fill, if any
+; Return values .: Success - True if an event was returned, False if event queue was empty
+;				   Failure - 0
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......: _CSFML_sfRenderWindow_create
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC.i ProtosfRenderWindow_isOpen(*renderWindow)
+Global _CSFML_sfRenderWindow_isOpen.ProtosfRenderWindow_isOpen = GetFunction(3, "sfRenderWindow_isOpen")
 
 
 ; #FUNCTION# ====================================================================================================================
@@ -580,20 +511,8 @@ End Sub
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-;Function _CSFML_sfRenderWindow_pollEvent(byval renderWindow As Long Ptr, byref event As Long Ptr) as integer
-Function _CSFML_sfRenderWindow_pollEvent(byval renderWindow As Long Ptr, byval event As sfEvent Ptr) As integer
-	
-	Dim As integer fred = sfRenderWindow_pollEvent(renderWindow, event)
-    
-  ;  dim as sfEvent joe
-  ;  joe = *event
-    
-  ;  if joe.T <> 0 and joe.T <> 11 and joe.T <> 12 and joe.T <> 13 then
-    
-  ;      print joe.T
-  ;  endif
-	Return fred
-End Function
+PrototypeC.i ProtosfRenderWindow_pollEvent(*renderWindow, *event)
+Global _CSFML_sfRenderWindow_pollEvent.ProtosfRenderWindow_pollEvent = GetFunction(3, "sfRenderWindow_pollEvent")
 
 
 ; #FUNCTION# ====================================================================================================================
@@ -610,12 +529,28 @@ End Function
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Sub _CSFML_sfRenderWindow_close(byval renderWindow As Long Ptr)
+PrototypeC ProtosfRenderWindow_close(*renderWindow)
+Global _CSFML_sfRenderWindow_close.ProtosfRenderWindow_close = GetFunction(3, "sfRenderWindow_close")
 
-	sfRenderWindow_close(renderWindow)
-End Sub
-
-
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfRenderWindow_destroy
+; Description ...: Close a render window (but doesn;t destroy the internal Data).
+; Syntax.........: _CSFML_sfRenderWindow_destroy($renderWindow)
+; Parameters ....: $renderWindow - Render window object
+; Return values .: Success - True
+;				   Failure - 0
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......: _CSFML_sfRenderWindow_create
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC ProtosfRenderWindow_destroy(*renderWindow)
+Global _CSFML_sfRenderWindow_destroy.ProtosfRenderWindow_destroy = GetFunction(3, "sfRenderWindow_destroy")
+	
+; 
+; 
 ; #FUNCTION# ====================================================================================================================
 ; Name...........: _CSFML_sfSprite_create
 ; Description ...: Create a new sprite.
@@ -630,11 +565,14 @@ End Sub
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Function _CSFML_sfSprite_create() As long ptr
+PrototypeC.l ProtosfSprite_create()
+Global _CSFML_sfSprite_create.ProtosfSprite_create = GetFunction(3, "sfSprite_create")
 
-    Dim As long ptr fred3 = sfSprite_create()
-    Return fred3
-End Function
+;Procedure _CSFML_sfSprite_create() As long ptr
+
+;    Dim As long ptr fred3 = sfSprite_create()
+;    Return fred3
+;EndProcedure
 
 
 ; #FUNCTION# ====================================================================================================================
@@ -652,11 +590,14 @@ End Function
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Function _CSFML_sfTexture_createFromFile(byval filename As ZString Ptr, byval area As long ptr) As long ptr
+PrototypeC.l ProtosfTexture_createFromFile(filename.p-ascii, *area)
+Global _CSFML_sfTexture_createFromFile.ProtosfTexture_createFromFile = GetFunction(3, "sfTexture_createFromFile")
 
-    Dim As long ptr fred3 = sfTexture_createFromFile(filename, area)
-    Return fred3
-End Function
+;Procedure _CSFML_sfTexture_createFromFile(byval filename As ZString Ptr, byval area As long ptr) As long ptr
+
+;    Dim As long ptr fred3 = sfTexture_createFromFile(filename, area)
+;    Return fred3
+;EndProcedure
 
 
 
@@ -681,10 +622,14 @@ End Function
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Sub _CSFML_sfSprite_setTexture(byval sprite As Long Ptr, byval texture As Long Ptr, byval resetRect As Boolean)
+PrototypeC ProtosfSprite_setTexture(*sprite, *texture, resetRect)
+Global _CSFML_sfSprite_setTexture.ProtosfSprite_setTexture = GetFunction(3, "sfSprite_setTexture")
 
-	sfSprite_setTexture(sprite, texture, resetRect)
-End Sub
+
+;Sub _CSFML_sfSprite_setTexture(byval sprite As Long Ptr, byval texture As Long Ptr, byval resetRect As Boolean)
+
+;	sfSprite_setTexture(sprite, texture, resetRect)
+;End Sub
 
 
 ; #FUNCTION# ====================================================================================================================
@@ -702,10 +647,27 @@ End Sub
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Sub _CSFML_sfRenderWindow_clear(byval renderWindow As Long Ptr, byval color2 As sfColor)
+PrototypeC Protofb_sfRenderWindow_clear(*renderWindow, *color)
+Global _CSFML_sfRenderWindow_clear.Protofb_sfRenderWindow_clear = GetFunction(6, "fb_sfRenderWindow_clear")
 
-    sfRenderWindow_clear(renderWindow, color2)
-End Sub
+
+; #FUNCTION# ====================================================================================================================
+; Name...........: _CSFML_sfRenderWindow_clear_rgba
+; Description ...: Clear a render window with the given color.
+; Syntax.........: _CSFML_sfRenderWindow_clear_rgba($renderWindow, $color)
+; Parameters ....: $renderWindow - Render window object
+;				   $color - Fill color
+; Return values .: Success - True
+;				   Failure - 0
+; Author ........: Sean Griffin
+; Modified.......:
+; Remarks .......:
+; Related .......: _CSFML_sfRenderWindow_create
+; Link ..........:
+; Example .......:
+; ===============================================================================================================================
+PrototypeC Protofb_sfRenderWindow_clear_rgba(*renderWindow, red, green, blue, alpha)
+Global _CSFML_sfRenderWindow_clear_rgba.Protofb_sfRenderWindow_clear_rgba = GetFunction(6, "fb_sfRenderWindow_clear_rgba")
 
 
 ; #FUNCTION# ====================================================================================================================
@@ -724,10 +686,13 @@ End Sub
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Sub _CSFML_sfRenderWindow_drawSprite(byval renderWindow As Long Ptr, byval object2 As Long Ptr, byval states As Long Ptr)
+PrototypeC ProtosfRenderWindow_drawSprite(*renderWindow, *object, *states)
+Global _CSFML_sfRenderWindow_drawSprite.ProtosfRenderWindow_drawSprite = GetFunction(3, "sfRenderWindow_drawSprite")
 
-    sfRenderWindow_drawSprite(renderWindow, object2, states)
-End Sub
+;Sub _CSFML_sfRenderWindow_drawSprite(byval renderWindow As Long Ptr, byval object2 As Long Ptr, byval states As Long Ptr)
+
+;    sfRenderWindow_drawSprite(renderWindow, object2, states)
+;End Sub
 
 
 ; #FUNCTION# ====================================================================================================================
@@ -744,192 +709,191 @@ End Sub
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Sub _CSFML_sfRenderWindow_display(byval renderWindow As Long Ptr)
-
-    sfRenderWindow_display(renderWindow)
-End Sub
+PrototypeC ProtosfRenderWindow_display(*renderWindow)
+Global _CSFML_sfRenderWindow_display.ProtosfRenderWindow_display = GetFunction(3, "sfRenderWindow_display")
 
 
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfText_create
-; Description ...: Create a new text.
-; Syntax.........: _CSFML_sfText_create()
-; Parameters ....: None
-; Return values .: Success - A new sfText object
-;				   Failure - 0 or Null
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Function _CSFML_sfText_create() As long ptr
 
-    Dim As long ptr fred3 = _CSFML_sfText_create()
-    Return fred3
-End Function
-
-
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfFont_createFromFile
-; Description ...: Create a new font from a file.
-; Syntax.........: _CSFML_sfFont_createFromFile($filename)
-; Parameters ....: $filename - Path of the font file to load
-; Return values .: Success - A new sfFont object
-;				   Failure - 0 or Null
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Function _CSFML_sfFont_createFromFile(byval filename As ZString Ptr) As long ptr
-
-    Dim As long ptr fred3 = sfFont_createFromFile(filename)
-    Return fred3
-End Function
-
-
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfText_setString
-; Description ...: Set the string of a text (from an ANSI string).
-;				   A text;s string is empty by Default
-; Syntax.........: _CSFML_sfText_setString($text, $string)
-; Parameters ....: $text - Text object
-;				   $string - New string
-; Return values .: Success - True
-;				   Failure - 0
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Sub _CSFML_sfText_setString(byval text As Long Ptr, byval string2 As ZString Ptr)
-
-    sfText_setString(text, string2)
-End Sub
-
-
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfText_setFont
-; Description ...: Set the font of a text.
-;				   The font argument refers to a texture that must exist as long as the text uses it. Indeed, the text
-;				   doesn't store its own copy of the font, but rather keeps a pointer To the one that you passed To this
-;				   function. If the font is destroyed and the text tries to use it, the behaviour is undefined
-; Syntax.........: _CSFML_sfText_setFont($text, $font)
-; Parameters ....: $text - Text object
-;				   $font - New font
-; Return values .: Success - True
-;				   Failure - 0
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Sub _CSFML_sfText_setFont(byval text As Long Ptr, byval font As Long Ptr)
-
-    sfText_setFont(text, font)
-End Sub
-
-
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfText_setCharacterSize
-; Description ...: Set the character size of a text.
-;				   The default size is 30.
-; Syntax.........: _CSFML_sfText_setCharacterSize($text, $size)
-; Parameters ....: $text - Text object
-;				   $size - New character size, in pixels
-; Return values .: Success - True
-;				   Failure - 0
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Sub _CSFML_sfText_setCharacterSize(byval text As Long Ptr, byval size As uinteger)
-
-    sfText_setCharacterSize(text, size)
-End Sub
-
-
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfText_setFillColor
-; Description ...: Set the fill color of a text.
-;				   By default, the text;s fill color is opaque white. Setting the fill color To a transparent color With an
-;				   outline will cause the outline to be displayed in the fill area of the text.
-; Syntax.........: _CSFML_sfText_setFillColor($text, $color)
-; Parameters ....: $text - Text object
-;				   $color - New fill color of the text
-; Return values .: Success - True
-;				   Failure - 0
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Sub _CSFML_sfText_setFillColor(byval text As Long Ptr, byval color2 As sfColor)
-
-    sfText_setFillColor(text, color2)
-End Sub
-
-
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfText_setPosition
-; Description ...: Set the position of a text.
-;				   This function completely overwrites the previous position. See sfText_move to apply an offset based on
-;				   the previous position instead. The default position of a text Text object is (0, 0).
-
-; Syntax.........: _CSFML_sfText_setPosition($text, $position)
-; Parameters ....: $text - Text object
-;				   $position - New position
-; Return values .: Success - True
-;				   Failure - 0
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Sub _CSFML_sfText_setPosition(byval text As Long Ptr, byval position As sfVector2f)
-
-    sfText_setPosition(text, position)
-End Sub
-
-
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfSprite_getPosition
-; Description ...: Set the position of a sprite, with a sfVector2f structure.
-;				   This function completely overwrites the previous position. See sfSprite_move to apply an offset based
-;				   on the previous position instead. The default position of a sprite Sprite object is (0, 0).
-; Syntax.........: _CSFML_sfSprite_getPosition($sprite, $position)
-; Parameters ....: $sprite - Sprite object
-;				   $position - New position (sfVector2f)
-; Return values .: Success - True
-;				   Failure - 0
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......: This function is slightly slower than _CSFML_sfSprite_setPosition_xy by about 100 frames per second
-; Related .......: _CSFML_sfSprite_create, _CSFML_sfVector2f_Constructor
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Function _CSFML_sfSprite_getPosition(byval sprite As Long Ptr) As sfVector2f
-
-    Dim As sfVector2f sprite_pos = sfSprite_getPosition(sprite)
-    Return sprite_pos
-End Function
-
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfText_create
+; ; Description ...: Create a new text.
+; ; Syntax.........: _CSFML_sfText_create()
+; ; Parameters ....: None
+; ; Return values .: Success - A new sfText object
+; ;				   Failure - 0 or Null
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......:
+; ; Related .......:
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Procedure _CSFML_sfText_create() As long ptr
+; 
+;     Dim As long ptr fred3 = _CSFML_sfText_create()
+;     Return fred3
+; EndProcedure
+; 
+; 
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfFont_createFromFile
+; ; Description ...: Create a new font from a file.
+; ; Syntax.........: _CSFML_sfFont_createFromFile($filename)
+; ; Parameters ....: $filename - Path of the font file to load
+; ; Return values .: Success - A new sfFont object
+; ;				   Failure - 0 or Null
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......:
+; ; Related .......:
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Procedure _CSFML_sfFont_createFromFile(byval filename As ZString Ptr) As long ptr
+; 
+;     Dim As long ptr fred3 = sfFont_createFromFile(filename)
+;     Return fred3
+; EndProcedure
+; 
+; 
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfText_setString
+; ; Description ...: Set the string of a text (from an ANSI string).
+; ;				   A text;s string is empty by Default
+; ; Syntax.........: _CSFML_sfText_setString($text, $string)
+; ; Parameters ....: $text - Text object
+; ;				   $string - New string
+; ; Return values .: Success - True
+; ;				   Failure - 0
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......:
+; ; Related .......:
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Sub _CSFML_sfText_setString(byval text As Long Ptr, byval string2 As ZString Ptr)
+; 
+;     sfText_setString(text, string2)
+; End Sub
+; 
+; 
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfText_setFont
+; ; Description ...: Set the font of a text.
+; ;				   The font argument refers to a texture that must exist as long as the text uses it. Indeed, the text
+; ;				   doesn't store its own copy of the font, but rather keeps a pointer To the one that you passed To this
+; ;				   function. If the font is destroyed and the text tries to use it, the behaviour is undefined
+; ; Syntax.........: _CSFML_sfText_setFont($text, $font)
+; ; Parameters ....: $text - Text object
+; ;				   $font - New font
+; ; Return values .: Success - True
+; ;				   Failure - 0
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......:
+; ; Related .......:
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Sub _CSFML_sfText_setFont(byval text As Long Ptr, byval font As Long Ptr)
+; 
+;     sfText_setFont(text, font)
+; End Sub
+; 
+; 
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfText_setCharacterSize
+; ; Description ...: Set the character size of a text.
+; ;				   The default size is 30.
+; ; Syntax.........: _CSFML_sfText_setCharacterSize($text, $size)
+; ; Parameters ....: $text - Text object
+; ;				   $size - New character size, in pixels
+; ; Return values .: Success - True
+; ;				   Failure - 0
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......:
+; ; Related .......:
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Sub _CSFML_sfText_setCharacterSize(byval text As Long Ptr, byval size As uinteger)
+; 
+;     sfText_setCharacterSize(text, size)
+; End Sub
+; 
+; 
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfText_setFillColor
+; ; Description ...: Set the fill color of a text.
+; ;				   By default, the text;s fill color is opaque white. Setting the fill color To a transparent color With an
+; ;				   outline will cause the outline to be displayed in the fill area of the text.
+; ; Syntax.........: _CSFML_sfText_setFillColor($text, $color)
+; ; Parameters ....: $text - Text object
+; ;				   $color - New fill color of the text
+; ; Return values .: Success - True
+; ;				   Failure - 0
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......:
+; ; Related .......:
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Sub _CSFML_sfText_setFillColor(byval text As Long Ptr, byval color2 As sfColor)
+; 
+;     sfText_setFillColor(text, color2)
+; End Sub
+; 
+; 
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfText_setPosition
+; ; Description ...: Set the position of a text.
+; ;				   This function completely overwrites the previous position. See sfText_move to apply an offset based on
+; ;				   the previous position instead. The default position of a text Text object is (0, 0).
+; 
+; ; Syntax.........: _CSFML_sfText_setPosition($text, $position)
+; ; Parameters ....: $text - Text object
+; ;				   $position - New position
+; ; Return values .: Success - True
+; ;				   Failure - 0
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......:
+; ; Related .......:
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Sub _CSFML_sfText_setPosition(byval text As Long Ptr, byval position As sfVector2f)
+; 
+;     sfText_setPosition(text, position)
+; End Sub
+; 
+; 
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfSprite_getPosition
+; ; Description ...: Set the position of a sprite, with a sfVector2f structure.
+; ;				   This function completely overwrites the previous position. See sfSprite_move to apply an offset based
+; ;				   on the previous position instead. The default position of a sprite Sprite object is (0, 0).
+; ; Syntax.........: _CSFML_sfSprite_getPosition($sprite, $position)
+; ; Parameters ....: $sprite - Sprite object
+; ;				   $position - New position (sfVector2f)
+; ; Return values .: Success - True
+; ;				   Failure - 0
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......: This function is slightly slower than _CSFML_sfSprite_setPosition_xy by about 100 frames per second
+; ; Related .......: _CSFML_sfSprite_create, _CSFML_sfVector2f_Constructor
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Procedure _CSFML_sfSprite_getPosition(byval sprite As Long Ptr) As sfVector2f
+; 
+;     Dim As sfVector2f sprite_pos = sfSprite_getPosition(sprite)
+;     Return sprite_pos
+; EndProcedure
+; 
 ; #FUNCTION# ====================================================================================================================
 ; Name...........: _CSFML_sfSprite_setPosition
 ; Description ...: Set the position of a sprite, with a sfVector2f structure.
@@ -947,110 +911,115 @@ End Function
 ; Link ..........:
 ; Example .......:
 ; ===============================================================================================================================
-Sub _CSFML_sfSprite_setPosition(byval sprite As Long Ptr, byval position As sfVector2f)
-
-    sfSprite_setPosition(sprite, position)
-End Sub
+PrototypeC Protofb_sfSprite_setPosition(*sprite, *position)
+Global _CSFML_sfSprite_setPosition.Protofb_sfSprite_setPosition = GetFunction(6, "fb_sfSprite_setPosition")
 
 
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfRenderWindow_drawText
-; Description ...: Draw text in a render window.
-; Syntax.........: _CSFML_sfRenderWindow_drawText($renderWindow, $object, $states)
-; Parameters ....: $renderWindow - Render window object
-;				   $object - the text to draw
-;				   $states - Render states to use for drawing (Null to use the default states)
-; Return values .: Success - True
-;				   Failure - 0
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......:
-; Related .......: _CSFML_sfRenderWindow_create
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Sub _CSFML_sfRenderWindow_drawText(byval renderWindow As Long Ptr, byval object2 As Long Ptr, byval states As Long Ptr)
+;Sub _CSFML_sfSprite_setPosition(byval sprite As Long Ptr, byval position As sfVector2f)
 
-    sfRenderWindow_drawText(renderWindow, object2, states)
-End Sub
+;    sfSprite_setPosition(sprite, position)
+;End Sub
 
 
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfText_create_and_set
-; Description ...: A convenience function to create a new text and also set it;s properties in one call.
-; Syntax.........: _CSFML_sfText_create_and_set()
-; Parameters ....: None
-; Return values .: Success - A new sfText object
-;				   Failure - 0 or Null
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Function _CSFML_sfText_create_and_set(byval font_ptr As Long Ptr, byval size As uinteger, byval color2 As sfColor, byval x As Single, byval y As Single) As long ptr
-    
-    Dim As Long Ptr text_ptr = sfText_create()
-    sfText_setFont(text_ptr, font_ptr)
-    sfText_setCharacterSize(text_ptr, size)
-    sfText_setFillColor(text_ptr, color2)
-    Dim As sfVector2f text_pos => (x, y)
-    sfText_setPosition(text_ptr, text_pos)
-    
-    Return text_ptr
-End Function
-
-
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfSprite_setOrigin
-; Description ...: Set the local origin of a sprite.
-;				   The origin of an object defines the center point for all transformations (position, scale, rotation).
-;				   The coordinates of this point must be relative to the top-left corner of the object, and ignore all
-;				   transformations (position, scale, rotation). The default origin of a sprite Sprite object is (0, 0).
-; Syntax.........: _CSFML_sfSprite_setOrigin($sprite, $origin)
-; Parameters ....: $sprite - Sprite object
-;				   $origin - New origin (sfVector2f)
-; Return values .: Success - True
-;				   Failure - 0
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......:
-; Related .......: _CSFML_sfSprite_create, _CSFML_sfVector2f_Constructor
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Sub _CSFML_sfSprite_setOrigin(byval sprite As Long Ptr, byval origin As sfVector2f)
-
-    sfSprite_setOrigin(sprite, origin)
-End Sub
-
-
-; #FUNCTION# ====================================================================================================================
-; Name...........: _CSFML_sfSprite_setRotation
-; Description ...: Set the orientation of a sprite.
-;				   This function completely overwrites the previous rotation. See sfSprite_rotate to add an angle based on
-;				   the previous rotation instead. The default rotation of a sprite Sprite object is 0.
-; Syntax.........: _CSFML_sfSprite_setRotation($sprite, $angle)
-; Parameters ....: $sprite - Sprite object
-;				   $angle - New rotation, in degrees
-; Return values .: Success - True
-;				   Failure - 0
-; Author ........: Sean Griffin
-; Modified.......:
-; Remarks .......:
-; Related .......: _CSFML_sfSprite_create
-; Link ..........:
-; Example .......:
-; ===============================================================================================================================
-Sub _CSFML_sfSprite_setRotation(byval sprite As Long Ptr, byval angle As single)
-
-    sfSprite_setRotation(sprite, angle)
-End Sub
-
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfRenderWindow_drawText
+; ; Description ...: Draw text in a render window.
+; ; Syntax.........: _CSFML_sfRenderWindow_drawText($renderWindow, $object, $states)
+; ; Parameters ....: $renderWindow - Render window object
+; ;				   $object - the text to draw
+; ;				   $states - Render states to use for drawing (Null to use the default states)
+; ; Return values .: Success - True
+; ;				   Failure - 0
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......:
+; ; Related .......: _CSFML_sfRenderWindow_create
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Sub _CSFML_sfRenderWindow_drawText(byval renderWindow As Long Ptr, byval object2 As Long Ptr, byval states As Long Ptr)
+; 
+;     sfRenderWindow_drawText(renderWindow, object2, states)
+; End Sub
+; 
+; 
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfText_create_and_set
+; ; Description ...: A convenience function to create a new text and also set it;s properties in one call.
+; ; Syntax.........: _CSFML_sfText_create_and_set()
+; ; Parameters ....: None
+; ; Return values .: Success - A new sfText object
+; ;				   Failure - 0 or Null
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......:
+; ; Related .......:
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Procedure _CSFML_sfText_create_and_set(byval font_ptr As Long Ptr, byval size As uinteger, byval color2 As sfColor, byval x As Single, byval y As Single) As long ptr
+;     
+;     Dim As Long Ptr text_ptr = sfText_create()
+;     sfText_setFont(text_ptr, font_ptr)
+;     sfText_setCharacterSize(text_ptr, size)
+;     sfText_setFillColor(text_ptr, color2)
+;     Dim As sfVector2f text_pos => (x, y)
+;     sfText_setPosition(text_ptr, text_pos)
+;     
+;     Return text_ptr
+; EndProcedure
+; 
+; 
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfSprite_setOrigin
+; ; Description ...: Set the local origin of a sprite.
+; ;				   The origin of an object defines the center point for all transformations (position, scale, rotation).
+; ;				   The coordinates of this point must be relative to the top-left corner of the object, and ignore all
+; ;				   transformations (position, scale, rotation). The default origin of a sprite Sprite object is (0, 0).
+; ; Syntax.........: _CSFML_sfSprite_setOrigin($sprite, $origin)
+; ; Parameters ....: $sprite - Sprite object
+; ;				   $origin - New origin (sfVector2f)
+; ; Return values .: Success - True
+; ;				   Failure - 0
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......:
+; ; Related .......: _CSFML_sfSprite_create, _CSFML_sfVector2f_Constructor
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Sub _CSFML_sfSprite_setOrigin(byval sprite As Long Ptr, byval origin As sfVector2f)
+; 
+;     sfSprite_setOrigin(sprite, origin)
+; End Sub
+; 
+; 
+; ; #FUNCTION# ====================================================================================================================
+; ; Name...........: _CSFML_sfSprite_setRotation
+; ; Description ...: Set the orientation of a sprite.
+; ;				   This function completely overwrites the previous rotation. See sfSprite_rotate to add an angle based on
+; ;				   the previous rotation instead. The default rotation of a sprite Sprite object is 0.
+; ; Syntax.........: _CSFML_sfSprite_setRotation($sprite, $angle)
+; ; Parameters ....: $sprite - Sprite object
+; ;				   $angle - New rotation, in degrees
+; ; Return values .: Success - True
+; ;				   Failure - 0
+; ; Author ........: Sean Griffin
+; ; Modified.......:
+; ; Remarks .......:
+; ; Related .......: _CSFML_sfSprite_create
+; ; Link ..........:
+; ; Example .......:
+; ; ===============================================================================================================================
+; Sub _CSFML_sfSprite_setRotation(byval sprite As Long Ptr, byval angle As single)
+; 
+;     sfSprite_setRotation(sprite, angle)
+; End Sub
+; 
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x86)
-; CursorPosition = 998
-; FirstLine = 979
+; CursorPosition = 914
+; FirstLine = 909
+; Folding = -
 ; EnableUnicode
 ; EnableXP
